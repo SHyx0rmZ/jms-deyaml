@@ -1,0 +1,25 @@
+{
+    "name": "ppokatilo/jms-deyaml",
+    "type": "library",
+    "description": "Visitor for deserializing YAML with JMS serializer",
+    "keywords": [ "deserialization", "yaml" , "jms" ],
+    "homepage": "http://github.com/SHyx0rmZ/jms-deyaml",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Patrick Pokatilo",
+            "email": "mail@shyxormz.net"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2",
+        "jms/serializer": "~0.11",
+        "symfony/yaml": "*"
+    },
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "SHy\\JMSDeYaml\\": ""
+        }
+    }
+}
