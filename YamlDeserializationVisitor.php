@@ -1,6 +1,6 @@
 <?php
 
-namespace SHy\JMSDeYaml;
+namespace SHyx0rmZ\JMSDeYaml;
 
 use JMS\Serializer\GenericDeserializationVisitor;
 use Symfony\Component\Yaml\Yaml;
