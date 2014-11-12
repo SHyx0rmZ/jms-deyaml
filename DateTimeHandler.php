@@ -7,25 +7,22 @@ use JMS\Serializer\Exception\RuntimeException;
 
 class DateTimeHandler extends AbstractYamlDeserializationHandler
 {
-    /** @var string */
-    protected $defaultFormat;
-    /** @var string */
-    protected $defaultTimezone;
+    /** @var array */
+    protected $defaults;
 
     public function __construct($defaultFormat = \DateTime::ISO8601, $defaultTimezone = 'UTC')
     {
-        $this->defaultFormat = $defaultFormat;
-        $this->defaultTimezone = $defaultTimezone;
+        $this->defaults = array(
+            $defaultFormat,
+            $defaultTimezone
+        );
     }
 
     public function deserialize(YamlDeserializationVisitor $visitor, $data, array $type, DeserializationContext $context)
     {
-        if ($data === null) {
-            return null;
-        }
-
-        $format = isset($type['params'][0]) ? $type['params'][0] : $this->defaultFormat;
-        $timezone = isset($type['params'][1]) ? $type['params'][1] : $this->defaultTimezone;
+        $params = array_replace($this->defaults, $type['params']);
+        $format = array_shift($params);
+        $timezone = array_shift($params);
 
         $datetime = \DateTime::createFromFormat($format, (string)$data, new \DateTimeZone($timezone));
 
