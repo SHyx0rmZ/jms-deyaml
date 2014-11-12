@@ -4,25 +4,13 @@ namespace SHyx0rmZ\JMSDeYaml;
 
 use JMS\Serializer\DeserializationContext;
 use JMS\Serializer\Exception\RuntimeException;
-use JMS\Serializer\Handler\DateHandler;
 
-class DateTimeHandler extends DateHandler
+class DateTimeHandler extends AbstractYamlDeserializationHandler
 {
     /** @var string */
     protected $defaultFormat;
     /** @var string */
     protected $defaultTimezone;
-
-    public static function getSubscribingMethods()
-    {
-        return array(
-            array(
-                'type' => \DateTime::class,
-                'format' => 'yml',
-                'method' => 'deserialize'
-            )
-        );
-    }
 
     public function __construct($defaultFormat = \DateTime::ISO8601, $defaultTimezone = 'UTC')
     {
