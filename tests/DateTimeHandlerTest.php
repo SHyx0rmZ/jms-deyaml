@@ -7,6 +7,25 @@ use SHyx0rmZ\JMSDeYaml\DateTimeHandler;
 use SHyx0rmZ\JMSDeYaml\YamlDeserializationVisitor;
 
 class DateTimeHandlerTest extends \PHPUnit_Framework_TestCase {
+    public function testCannotDeserializeADateTimeIfNotInFormat() {
+        $handler = new DateTimeHandler();
+
+        $context = $this->prophesize(DeserializationContext::class)->reveal();
+        $visitor = $this->prophesize(YamlDeserializationVisitor::class)->reveal();
+
+        $this->expectException('RuntimeException');
+
+        $handler->deserialize(
+            $visitor,
+            '2016-09-23 17:45:00 UTC',
+            [
+                'type' => 'DateTime',
+                'params' => []
+            ],
+            $context
+        );
+    }
+
     public function testCanDeserializeADateTimeWithDefaults() {
         $handler = new DateTimeHandler();
 
